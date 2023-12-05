@@ -1,4 +1,3 @@
-from functools import reduce
 import re
 from typing import List
 
@@ -15,18 +14,6 @@ DIGIT_NAMES = {
     "eight": "8",
     "nine": "9",
 }
-
-""" DIGITS = {
-    1: 1,
-    2: 2,
-    3: 3,
-    4: 4,
-    5: 5,
-    6: 6,
-    7: 7,
-    8: 8,
-    9: 9,
-} | DIGIT_NAMES """
 
 DIGITS = {
     "1": "1",
