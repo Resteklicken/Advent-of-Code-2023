@@ -1,3 +1,5 @@
+.vscode/
+
 # Created by https://www.toptal.com/developers/gitignore/api/visualstudiocode,python
 # Edit at https://www.toptal.com/developers/gitignore?templates=visualstudiocode,python
 
@@ -192,6 +194,3 @@ pyrightconfig.json
 .ionide
 
 # End of https://www.toptal.com/developers/gitignore/api/visualstudiocode,python
-messages.jsonl
-.vscode/launch.json
-.vscode/settings.json
