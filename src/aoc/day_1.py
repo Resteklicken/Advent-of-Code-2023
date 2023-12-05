@@ -1,12 +1,36 @@
-from functools import reduce
-from typing import List, Tuple
+from typing import List
 
 from aoc import INPUT_DIR
 
+DIGITS = {
+    "one": 1,
+    "two": 2,
+    "three": 3,
+    "four": 4,
+    "five": 5,
+    "six": 6,
+    "seven": 7,
+    "eight": 8,
+    "nine": 9,
+    1: 1,
+    2: 2,
+    3: 3,
+    4: 4,
+    5: 5,
+    6: 6,
+    7: 7,
+    8: 8,
+    9: 9,
+}
 
-def extract_numbers_from_line(input: str) -> int:
-    first = next(x for x in input if x.isdigit())
-    second = next(x for x in reversed(input) if x.isdigit())
+
+def extract_numbers_from_line(input: str, include_words: bool = False) -> int:
+    if include_words:
+        first = next(x for x in input if DIGITS.get(x, None))
+        second = next(x for x in reversed(input) if DIGITS.get(x, None))
+    else:
+        first = next(x for x in input if x.isdigit())
+        second = next(x for x in reversed(input) if x.isdigit())
     return int(first + second)
 
 
