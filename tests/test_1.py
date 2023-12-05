@@ -32,19 +32,23 @@ def test_number_extraction_with_just_numbers(input, expected):
     assert extract_numbers_from_line(input, include_words=False) == expected
 
 
+def test_solve_1(test_input_1):
+    assert solve_1(test_input_1) == 142
+
+
 @pytest.mark.parametrize(
     "input,expected",
     [
-        [[1, 2], 3],
-        [[4, 5, 7, 3], 19],
+        ["one", "1"],
+        ["teight1asfa", "81"],
+        ["three16asix", "3166"],
+        ["threeight", "38"],
+        ["two1nine", "219"],
+        ["eightwothree", "823"],
     ],
 )
-def test_compute_sum(input, expected):
-    assert compute_sum(input) == expected
-
-
-def test_solve_1(test_input_1):
-    assert solve_1(test_input_1) == 142
+def test_word_to_digit_mapping(input, expected):
+    assert map_digit_names(input) == expected
 
 
 @pytest.mark.parametrize(
@@ -65,6 +69,5 @@ def test_number_extraction_with_spelled_out_numbers(input, expected):
     assert extract_numbers_from_line(input, include_words=True) == expected
 
 
-@pytest.mark.skip
 def test_solve_2(test_input_2):
     assert solve_2(test_input_2) == 281
