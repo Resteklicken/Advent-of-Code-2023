@@ -4,7 +4,10 @@ version = "0.1.0"
 description = ""
 authors = ["René Gentzen <rene.gentzen@mittelstand.ai>"]
 readme = "README.md"
-packages = [{include = "aoc_2023", from = "src"}]
+packages = [{ include = "aoc", from = "src" }]
+
+[tool.poetry.scripts]
+day_1 = 'aoc.day_1:main'
 
 [tool.poetry.dependencies]
 python = "^3.12"
