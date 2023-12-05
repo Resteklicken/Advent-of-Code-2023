@@ -1,13 +1,14 @@
 [tool.poetry]
 name = "aoc-2023"
 version = "0.1.0"
-description = ""
+description = "My solutions for the Advent of Code 2023"
 authors = ["René Gentzen <rene.gentzen@mittelstand.ai>"]
 readme = "README.md"
 packages = [{ include = "aoc", from = "src" }]
 
 [tool.poetry.scripts]
 day_1 = 'aoc.day_1:main'
+day_2 = 'aoc.day_2:main'
 
 [tool.poetry.dependencies]
 python = "^3.12"
