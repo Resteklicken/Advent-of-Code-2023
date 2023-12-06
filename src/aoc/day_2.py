@@ -34,6 +34,10 @@ def is_round_possible(ballz: Dict[str, int]) -> bool:
     return all(ballz[k] <= BALLZ[k] for k in ballz.keys())
 
 
+def is_game_possible(rounds: List[bool]) -> bool:
+    return all(e for e in rounds)
+
+
 def solve_1(input: List[str]) -> int:
     s = [remove_prefix(l) for l in input]
     ss = [split_rounds(l) for l in s]
