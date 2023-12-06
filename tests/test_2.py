@@ -43,4 +43,4 @@ def test_is_round_possible():
 
 
 def test_solve_1(test_input_1):
-    solve_1(test_input_1)
+    assert solve_1(test_input_1) == 8
