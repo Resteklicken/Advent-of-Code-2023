@@ -44,3 +44,25 @@ def test_is_round_possible():
 
 def test_solve_1(test_input_1):
     assert solve_1(test_input_1) == 8
+
+
+def test_find_min_ballz():
+    l = [
+        {"red": 6, "blue": 9, "green": 3},
+        {"green": 8, "blue": 0},
+        {"red": 1, "blue": 50},
+    ]
+    assert find_min_ballz(l) == {"red": 6, "blue": 50, "green": 8}
+
+
+def test_calculate_power():
+    l = [
+        {"red": 6, "blue": 9, "green": 3},
+        {"green": 8, "blue": 0},
+        {"red": 1, "blue": 50},
+    ]
+    assert calculate_powers(l) == [162, 0, 50]
+
+
+def test_solve_2(test_input_1):
+    assert solve_2(test_input_1) == 2286
