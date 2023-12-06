@@ -1,7 +1,6 @@
-import json
 import re
 from functools import reduce
-from typing import Any, Dict, List, Tuple
+from typing import Dict, List, Tuple
 
 from aoc import INPUT_DIR
 
