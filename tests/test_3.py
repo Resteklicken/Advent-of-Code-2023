@@ -16,3 +16,16 @@ def test_extract_numbers():
         ("664", 21, 24),
         ("598", 25, 28),
     ]
+
+@pytest.mark.parametrize(
+    "line,start,end,expected",
+    [
+        ("...#*......", 0, 3, True),
+        ("...*...#...", 2, 8, True),
+        ("...*....#..", 1, 1, False),
+        ("...*......", 5, 9, False),
+    ],
+)
+def test_check_for_symbols(line, start, end, expected):
+    assert check_for_symbols(line, start, end) == expected
+

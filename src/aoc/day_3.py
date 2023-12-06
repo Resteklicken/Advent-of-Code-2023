@@ -1,11 +1,17 @@
 import re
-from typing import Any, List, Tuple
+from typing import List, Tuple
 
 from aoc import INPUT_DIR
 
 
 def extract_numbers(line: str) -> List[Tuple[str, int, int]]:
     return [(m.group(), m.start(), m.end()) for m in re.finditer(r"(\d+)", line)]
+
+
+def check_for_symbols(line: str, start: int, end: int) -> bool:
+    start = start - 1 if start > 0 else start
+    end = end + 1 if end < len(line) - 1 else end
+    return bool(re.search(r"[^\d\.]", line[start:end]))
 
 
 def solve_1(input: List[str]) -> int:
