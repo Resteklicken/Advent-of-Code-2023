@@ -80,9 +80,9 @@ def solve_2(input: List[str]) -> int:
     gears = []
     for i, line in enumerate(lines):
         for gear in line:
-            if is_adjacent_to_symbol(input, i, part):
-                parts.append(int(part[0]))
-    return sum(parts)
+            if g := is_gear(input, i, gear):
+                gears.append(g[0] * g[1])
+    return sum(gears)
 
 
 def main():

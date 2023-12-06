@@ -72,6 +72,7 @@ def test_range_overlaps(start1, end1, start2, end2, expected):
         (".755..$.*..664.598..", 8, []),
         (".755..$.*..664.598..", 5, [755]),
         (".755..$.*..664.598..", 14, [664, 598]),
+        (".664.598..", 5, [598]),
     ],
 )
 def test_check_for_numbers(line, pos, expected):
@@ -82,8 +83,13 @@ def test_check_for_numbers(line, pos, expected):
     "line,line_no,pos,expected",
     [
         (["467..114..", "...*......", "..35..633."], 1, 3, (467, 35)),
-        (["467..114..", "...*......", "..35..633."], 1, 3, (467, 35)),
+        (["...$.*....", ".664.598.."], 0, 5, (664, 598)),
+        (["467..114..", "....*.....", "..35.633.."], 1, 4, None),
     ],
 )
 def test_is_gear(line, line_no, pos, expected):
     assert is_gear(line, line_no, pos) == expected
+
+
+def test_solve_2(test_input_1):
+    assert solve_2(test_input_1) == 467835
