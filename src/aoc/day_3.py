@@ -57,7 +57,7 @@ def check_for_numbers(line: str, pos: int) -> List[int]:
     numbers = [
         (int(m.group()), m.start(), m.end()) for m in re.finditer(r"(\d+)", line)
     ]
-    return [num[0] for num in numbers if range_overlaps(num[1], num[2], start, end)]
+    return [num[0] for num in numbers if range_overlaps(num[1], num[2] - 1, start, end)]
 
 
 def is_gear(schematic: List[str], line_number: int, pos: int) -> Tuple[int, int] | None:
