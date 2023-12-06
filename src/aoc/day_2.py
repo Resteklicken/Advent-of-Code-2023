@@ -1,3 +1,4 @@
+import json
 import re
 from typing import Any, Dict, List, Tuple
 
@@ -34,10 +35,10 @@ def is_round_possible(ballz: Dict[str, int]) -> bool:
 
 
 def solve_1(input: List[str]) -> int:
-    s: List[str] = [remove_prefix(l) for l in input]
+    s = [remove_prefix(l) for l in input]
     ss = [split_rounds(l) for l in s]
-    sss = [split_counts(ll) for l in ss for ll in l]
-    ssss = [count_ballz(g) for g in sss]
+    sss = [[split_counts(l) for l in line] for line in ss]
+    ssss = [[count_ballz(d) for d in g] for g in sss]
 
 
 def main():
