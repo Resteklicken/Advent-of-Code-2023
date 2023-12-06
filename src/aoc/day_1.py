@@ -57,11 +57,8 @@ def solve_2(input: List[str]) -> int:
 def main():
     with open(f"{INPUT_DIR}/1_1_input.txt") as f:
         x = f.readlines()
-        print(solve_1(x))
-
-    with open(f"{INPUT_DIR}/1_1_input.txt") as f:
-        x = f.readlines()
-        print(solve_2(x))
+        print(f"Part 1: {solve_1(x)}")
+        print(f"Part 2: {solve_2(x)}")
 
 
 if __name__ == "__main__":
