@@ -1,6 +1,11 @@
-from typing import List
+import re
+from typing import Any, List, Tuple
 
 from aoc import INPUT_DIR
+
+
+def extract_numbers(line: str) -> List[Tuple[str, int, int]]:
+    return [(m.group(), m.start(), m.end()) for m in re.finditer(r"(\d+)", line)]
 
 
 def solve_1(input: List[str]) -> int:
