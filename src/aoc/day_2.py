@@ -51,6 +51,9 @@ def solve_1(input: List[str]) -> int:
     ss = [split_rounds(l) for l in s]
     sss = [[split_counts(l) for l in line] for line in ss]
     ssss = [[count_ballz(d) for d in g] for g in sss]
+    sssss = [[is_round_possible(d) for d in g] for g in ssss]
+    ssssss = [is_game_possible(g) for g in sssss]
+    return sum_possible_games(ssssss)
 
 
 def main():
