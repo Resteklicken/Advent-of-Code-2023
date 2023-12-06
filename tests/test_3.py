@@ -41,3 +41,7 @@ def test_is_adjacent_to_symbol():
         line_number=0,
         match=("467", 0, 3),
     )
+
+
+def test_solve_1(test_input_1):
+    assert solve_1(test_input_1) == 4361

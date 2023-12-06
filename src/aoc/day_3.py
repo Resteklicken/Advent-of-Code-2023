@@ -33,7 +33,13 @@ def is_adjacent_to_symbol(
 
 
 def solve_1(input: List[str]) -> int:
-    return 0
+    lines = [extract_numbers(line) for line in input]
+    parts = []
+    for i, line in enumerate(lines):
+        for part in line:
+            if is_adjacent_to_symbol(input, i, part):
+                parts.append(int(part[0]))
+    return sum(parts)
 
 
 def solve_2(input: List[str]) -> int:
