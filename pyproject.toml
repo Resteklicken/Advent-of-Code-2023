@@ -9,6 +9,7 @@ packages = [{ include = "aoc", from = "src" }]
 [tool.poetry.scripts]
 day_1 = 'aoc.day_1:main'
 day_2 = 'aoc.day_2:main'
+day_3 = 'aoc.day_3:main'
 
 [tool.poetry.dependencies]
 python = "^3.12"
