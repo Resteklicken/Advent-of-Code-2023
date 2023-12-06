@@ -1,5 +1,3 @@
-from collections import OrderedDict
-
 import pytest
 
 from aoc import INPUT_DIR
@@ -36,9 +34,13 @@ def test_count_balls():
 
 
 def test_is_round_possible():
-    assert solve_1(
-        ["Game 5: 6 red, 1 blue, 3 green, 8 blue; 2 blue, 1 red, 2 green"]
-    ) == [
-        {"red": 6, "blue": 9, "green": 3},
-        {"red": 1, "blue": 2, "green": 2},
-    ]
+    assert is_round_possible({"red": 0})
+    assert is_round_possible({"red": 0, "blue": 0, "green": 0})
+    assert is_round_possible({"blue": 9, "green": 3})
+    assert not is_round_possible({"red": 13, "blue": 9, "green": 3})
+    assert not is_round_possible({"red": 100, "blue": 100, "green": 0})
+    assert not is_round_possible({"red": 12, "blue": 14, "green": 15})
+
+
+def test_solve_1(test_input_1):
+    solve_1(test_input_1)
