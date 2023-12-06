@@ -14,6 +14,24 @@ def check_for_symbols(line: str, start: int, end: int) -> bool:
     return bool(re.search(r"[^\d\.]", line[start:end]))
 
 
+def is_adjacent_to_symbol(
+    schematic: List[str], line_number: int, match: Tuple[str, int, int]
+) -> bool:
+    adjacent = False
+    if line_number > 0:
+        adjacent = adjacent or check_for_symbols(
+            line=schematic[line_number - 1], start=match[1], end=match[2]
+        )
+    if line_number < len(schematic) - 1:
+        adjacent = adjacent or check_for_symbols(
+            line=schematic[line_number + 1], start=match[1], end=match[2]
+        )
+    adjacent = adjacent or check_for_symbols(
+        line=schematic[line_number], start=match[1], end=match[2]
+    )
+    return adjacent
+
+
 def solve_1(input: List[str]) -> int:
     return 0
 

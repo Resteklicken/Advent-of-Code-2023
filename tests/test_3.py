@@ -17,6 +17,7 @@ def test_extract_numbers():
         ("598", 25, 28),
     ]
 
+
 @pytest.mark.parametrize(
     "line,start,end,expected",
     [
@@ -29,3 +30,14 @@ def test_extract_numbers():
 def test_check_for_symbols(line, start, end, expected):
     assert check_for_symbols(line, start, end) == expected
 
+
+def test_is_adjacent_to_symbol():
+    assert is_adjacent_to_symbol(
+        [
+            "467..114..",
+            "...*......",
+            "..35..633.",
+        ],
+        line_number=0,
+        match=("467", 0, 3),
+    )
