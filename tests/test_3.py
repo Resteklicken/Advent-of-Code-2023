@@ -81,6 +81,7 @@ def test_check_for_numbers(line, pos, expected):
 @pytest.mark.parametrize(
     "line,line_no,pos,expected",
     [(["467..114..", "...*......", "..35..633."], 1, 3, (467, 35))],
+    [(["467..114..", "...*......", "..35..633."], 1, 3, (467, 35))],
 )
 def test_is_gear(line, line_no, pos, expected):
     assert is_gear(line, line_no, pos) == expected
