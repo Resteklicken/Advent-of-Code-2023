@@ -38,6 +38,14 @@ def is_game_possible(rounds: List[bool]) -> bool:
     return all(e for e in rounds)
 
 
+def sum_possible_games(games: List[bool]) -> int:
+    score = 0
+    for i, game in enumerate(games):
+        if game:
+            score += i + 1
+    return score
+
+
 def solve_1(input: List[str]) -> int:
     s = [remove_prefix(l) for l in input]
     ss = [split_rounds(l) for l in s]
