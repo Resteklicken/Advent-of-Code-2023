@@ -8,10 +8,14 @@ def remove_prefix(s: str) -> str:
     return re.sub(r"Card\s+\d+: ", "", s)
 
 
+def split_games(line: str) -> List[str]:
+    s = line.strip().split("|")
+    return list(map(str.strip, s))
 
 
 def solve_1(input: List[str]) -> int:
-    return 0
+    s = list(map(remove_prefix, input))
+    ss = list(map(split_games, s))
 
 
 def solve_2(input: List[str]) -> int:
