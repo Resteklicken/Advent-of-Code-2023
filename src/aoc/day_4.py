@@ -5,7 +5,9 @@ from aoc import INPUT_DIR
 
 
 def remove_prefix(s: str) -> str:
-    return re.sub(r"Card \d+: ", "", s)
+    return re.sub(r"Card\s+\d+: ", "", s)
+
+
 
 
 def solve_1(input: List[str]) -> int:
