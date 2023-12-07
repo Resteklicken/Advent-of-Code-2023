@@ -34,3 +34,20 @@ def test_split_games():
 
 def test_split_numbers():
     assert split_numbers("61 30 68 82 17 32 24 19") == [61, 30, 68, 82, 17, 32, 24, 19]
+
+
+def test_get_intersection():
+    assert get_intersection(
+        [{61, 30, 68, 82, 17, 32, 24, 19}, {61, 31, 0, 5, 32, 24, 65}]
+    ) == {61, 32, 24}
+
+
+@pytest.mark.parametrize(
+    "length, expected", [(5, 16), (4, 8), (3, 4), (2, 2), (1, 1), (0, 0)]
+)
+def test_calculate_score(length, expected):
+    assert calculate_score(length) == expected
+
+
+def test_solve_1(test_input_1):
+    assert solve_1(test_input_1) == 13

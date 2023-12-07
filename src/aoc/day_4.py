@@ -1,5 +1,5 @@
 import re
-from typing import List
+from typing import List, Set
 
 from aoc import INPUT_DIR
 
@@ -14,14 +14,30 @@ def split_games(line: str) -> List[str]:
 
 
 def split_numbers(num_string: str) -> List[int]:
-    s = num_string.split(" ")
+    s = num_string.split()
     return list(map(int, s))
+
+
+def get_intersection(line: List[Set[int]]) -> Set[int]:
+    [l, r] = line
+    return l & r
+
+
+def calculate_score(length: int) -> int:
+    if length < 2:
+        return length
+    else:
+        return 2 ** (length - 1)
 
 
 def solve_1(input: List[str]) -> int:
     s = list(map(remove_prefix, input))
     ss = list(map(split_games, s))
-    sss = [split_numbers(nums) for line in ss for nums in line]
+    sss = [list(map(set, map(split_numbers, line))) for line in ss]
+    ssss = list(map(get_intersection, sss))
+    sssss = list(map(len, ssss))
+    ssssss = list(map(calculate_score, sssss))
+    return sum(ssssss)
 
 
 def solve_2(input: List[str]) -> int:
