@@ -30,8 +30,8 @@ def calculate_score(length: int) -> int:
         return 2 ** (length - 1)
 
 
-def solve_1(input: List[str]) -> int:
-    s = list(map(remove_prefix, input))
+def solve_1(test_input: List[str]) -> int:
+    s = list(map(remove_prefix, test_input))
     ss = list(map(split_games, s))
     sss = [list(map(set, map(split_numbers, line))) for line in ss]
     ssss = list(map(get_intersection, sss))
@@ -42,29 +42,30 @@ def solve_1(input: List[str]) -> int:
 
 def calculate_own_contribution(card_list: List[int], own_index: int) -> int:
     cont = min(card_list[own_index], len(card_list) - 1 - own_index)
-    print(f"{own_index=}, {cont=}")
     return cont
 
 
-def calculate_number_of_cards(card_list: List[int], own_index: int) -> int:
+def calculate_number_of_cards(
+    card_list: List[int], own_index: int, counts: List[int]
+) -> None:
     own_contribution = calculate_own_contribution(card_list, own_index)
+    counts[own_index] += 1
     if own_contribution == 0:
-        return 0
-    total_contribution = own_contribution
+        return
     for i in range(own_contribution):
-        print(f"{own_index=}: {own_contribution=}, {total_contribution=}")
-        total_contribution += calculate_number_of_cards(card_list, own_index + i + 1)
-    return total_contribution
+        calculate_number_of_cards(card_list, own_index + i + 1, counts)
+    return
 
 
-def solve_2(input: List[str]) -> int:
-    s = list(map(remove_prefix, input))
+def solve_2(test_input: List[str]) -> int:
+    s = list(map(remove_prefix, test_input))
     ss = list(map(split_games, s))
     sss = [list(map(set, map(split_numbers, line))) for line in ss]
     ssss = list(map(get_intersection, sss))
     sssss = list(map(len, ssss))
-    ssssss = [calculate_number_of_cards(sssss, i) for i, _ in enumerate(sssss)]
-    return sum(ssssss)
+    counts = [0 for num in sssss]
+    _ = [calculate_number_of_cards(sssss, i, counts) for i, _ in enumerate(sssss)]
+    return sum(counts)
 
 
 def main():
