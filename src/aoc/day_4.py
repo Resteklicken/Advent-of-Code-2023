@@ -1,6 +1,11 @@
+import re
 from typing import List
 
 from aoc import INPUT_DIR
+
+
+def remove_prefix(s: str) -> str:
+    return re.sub(r"Card \d+: ", "", s)
 
 
 def solve_1(input: List[str]) -> int:
