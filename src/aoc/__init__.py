@@ -1,1 +1,3 @@
-INPUT_DIR = "/workspaces/aoc/data"
+from pathlib import Path
+
+INPUT_DIR = Path(__file__).parent.parent.parent / "data"
