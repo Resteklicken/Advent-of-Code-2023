@@ -58,3 +58,7 @@ def test_solve_1(test_input_1):
 )
 def test_calculate_own_contribution(index, expected):
     assert calculate_own_contribution([4, 2, 2, 0, 2, 1], index) == expected
+
+
+def test_solve_2(test_input_1):
+    assert solve_2(test_input_1) == 30
