@@ -40,8 +40,24 @@ def solve_1(input: List[str]) -> int:
     return sum(ssssss)
 
 
+def calculate_own_contribution(card_list: List[int], own_index: int) -> int:
+    return min(card_list[own_index], len(card_list) - 1 - own_index)
+
+
+def calculate_number_of_cards(card_list: List[int], own_index: int) -> int:
+    own_contribution = calculate_own_contribution(card_list, own_index)
+    total_contribution = own_contribution
+    for card in card_list[own_index + 1 : own_contribution]:
+        pass
+    return own_contribution + 0
+
+
 def solve_2(input: List[str]) -> int:
-    return 0
+    s = list(map(remove_prefix, input))
+    ss = list(map(split_games, s))
+    sss = [list(map(set, map(split_numbers, line))) for line in ss]
+    ssss = list(map(get_intersection, sss))
+    sssss = list(map(len, ssss))
 
 
 def main():

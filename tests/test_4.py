@@ -43,7 +43,7 @@ def test_get_intersection():
 
 
 @pytest.mark.parametrize(
-    "length, expected", [(5, 16), (4, 8), (3, 4), (2, 2), (1, 1), (0, 0)]
+    "length,expected", [(5, 16), (4, 8), (3, 4), (2, 2), (1, 1), (0, 0)]
 )
 def test_calculate_score(length, expected):
     assert calculate_score(length) == expected
@@ -51,3 +51,10 @@ def test_calculate_score(length, expected):
 
 def test_solve_1(test_input_1):
     assert solve_1(test_input_1) == 13
+
+
+@pytest.mark.parametrize(
+    "index,expected", [(0, 4), (1, 2), (2, 2), (3, 0), (4, 1), (5, 0)]
+)
+def test_calculate_own_contribution(index, expected):
+    assert calculate_own_contribution([4, 2, 2, 0, 2, 1], index) == expected
