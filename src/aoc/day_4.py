@@ -49,7 +49,7 @@ def calculate_own_contribution(card_list: List[int], own_index: int) -> int:
 def calculate_number_of_cards(card_list: List[int], own_index: int) -> int:
     own_contribution = calculate_own_contribution(card_list, own_index)
     if own_contribution == 0:
-        return 1
+        return 0
     total_contribution = own_contribution
     for i in range(own_contribution):
         print(f"{own_index=}: {own_contribution=}, {total_contribution=}")
