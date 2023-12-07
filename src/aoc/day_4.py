@@ -13,9 +13,15 @@ def split_games(line: str) -> List[str]:
     return list(map(str.strip, s))
 
 
+def split_numbers(num_string: str) -> List[int]:
+    s = num_string.split(" ")
+    return list(map(int, s))
+
+
 def solve_1(input: List[str]) -> int:
     s = list(map(remove_prefix, input))
     ss = list(map(split_games, s))
+    sss = [split_numbers(nums) for line in ss for nums in line]
 
 
 def solve_2(input: List[str]) -> int:

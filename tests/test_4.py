@@ -30,3 +30,7 @@ def test_split_games():
         "13 32 20 16 61",
         "61 30 68 82 17 32 24 19",
     ]
+
+
+def test_split_numbers():
+    assert split_numbers("61 30 68 82 17 32 24 19") == [61, 30, 68, 82, 17, 32, 24, 19]
