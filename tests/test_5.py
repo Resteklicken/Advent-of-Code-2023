@@ -110,3 +110,7 @@ def test_calculate_mapping_endpoints():
         (52, 50),
         (99, 97),
     ]
+
+
+def test_solve_2(test_input_1):
+    assert solve_2(test_input_1) == 46

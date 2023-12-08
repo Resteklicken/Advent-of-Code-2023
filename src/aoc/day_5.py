@@ -1,3 +1,4 @@
+from copy import deepcopy
 import re
 import sys
 from concurrent.futures import Future, ThreadPoolExecutor
@@ -83,9 +84,8 @@ def calculate_mapping_endpoints(mapping: List[List[int]]) -> List[Tuple[int, int
     )
 
 
-def invert_mapping(mapping: List[List[int]], params: List[int]):
+def invert_mapping(mapping: List[List[int]], params: List[int]) -> List[int]:
     map_endpts = calculate_mapping_endpoints(mapping)
-
     output_src_endpts = sorted(
         [resolve_next_mapping_inverse(param, mapping) for param in params]
     )
@@ -95,18 +95,34 @@ def invert_mapping(mapping: List[List[int]], params: List[int]):
     if input_src_endpts[-1] < sys.maxsize:
         input_src_endpts = input_src_endpts + [input_src_endpts[-1] + 1, sys.maxsize]
     input_endpts = sorted(set(output_src_endpts) | set(input_src_endpts))
-
     return input_endpts
+
+
+def invert_mappings(mappings: List[List[List[int]]]):
+    rev_mappings = list(reversed(mappings))
+    inverted_mappings = [invert_mapping(rev_mappings[0], [0, sys.maxsize])]
+    for i, mapping in enumerate(rev_mappings[1:]):
+        inverted_mappings.append(invert_mapping(mapping, inverted_mappings[i - 1]))
+    return inverted_mappings
+
+
+def in_seed_range(seeds: List[int], seed: int) -> bool:
+    return any([seeds[i] <= seed <= seeds[i + 1] for i in range(0, len(seeds), 2)])
 
 
 def solve_2(input_data: str) -> int:
     seeds, *rest = input_data.split("\n\n")
     seeds = remove_prefix(seeds)
     seeds = split_numbers(seeds)
-    seeds = resolve_seed_ranges_for_brute_force(seeds)
+    seeds = resolve_seed_ranges(seeds)
     mappings = split_blocks(rest)
-    with ThreadPoolExecutor(max_workers=len(seeds)) as pool:
-        locations = [pool.submit(find_location, seed, mappings) for seed in seeds]
+    inverted_mappings = invert_mappings(deepcopy(mappings))
+    # Intersect seed endpoints with seed ranges.
+    seed_endpts = [s for s in inverted_mappings[-1] if in_seed_range(seeds, s)]
+    # Make sure to include the endpoints of the seed ranges.
+    seed_endpts = sorted(set(seed_endpts) | set(seeds))
+    with ThreadPoolExecutor(max_workers=len(seed_endpts)) as pool:
+        locations = [pool.submit(find_location, seed, mappings) for seed in seed_endpts]
     return get_lowest_element(locations)
 
 
