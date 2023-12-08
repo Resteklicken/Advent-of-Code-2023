@@ -7,7 +7,7 @@ from aoc.day_5 import *
 @pytest.fixture
 def test_input_1():
     with open(f"{INPUT_DIR}/5_1_test.txt", "r", encoding="utf-8") as f:
-        return f.readlines()
+        return f.read()
 
 
 def test_split_blocks():
@@ -46,3 +46,7 @@ def test_split_blocks():
 )
 def test_resolve_next_mapping(seed, mapping, expected):
     assert resolve_next_mapping(seed, mapping) == expected
+
+
+def test_solve_1(test_input_1):
+    assert solve_1(test_input_1) == 35

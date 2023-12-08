@@ -32,6 +32,14 @@ def solve_1(input_data: str) -> int:
     seeds = remove_prefix(seeds)
     seeds = split_numbers(seeds)
     mappings = split_blocks(rest)
+    locations = {}
+    for seed in seeds:
+        cur = seed
+        for mapping in mappings:
+            cur = resolve_next_mapping(cur, mapping)
+        locations[seed] = cur
+    lowest = min(locations.keys())
+    return locations[lowest]
 
 
 def solve_2(input_data: str) -> int:
@@ -39,7 +47,7 @@ def solve_2(input_data: str) -> int:
 
 
 def main():
-    with open(f"{INPUT_DIR}/5_1_test.txt", "r", encoding="utf-8") as f:
+    with open(f"{INPUT_DIR}/5_1_input.txt", "r", encoding="utf-8") as f:
         x = f.read()
         print(f"Part 1: {solve_1(x)}")
         print(f"Part 2: {solve_2(x)}")
