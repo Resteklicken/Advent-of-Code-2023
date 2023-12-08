@@ -20,8 +20,7 @@ def split_blocks(rest: List[str]) -> List[List[List[int]]]:
 
 
 def resolve_next_mapping(seed: int, mapping: List[List[int]]):
-    for line in mapping:
-        dst, src, range_len = line
+    for dst, src, range_len in mapping:
         for i, num in enumerate(range(src, src + range_len + 1)):
             if num == seed:
                 return dst + i
