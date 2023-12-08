@@ -13,22 +13,27 @@ def split_numbers(num_string: str) -> List[int]:
     return list(map(int, s))
 
 
-def solve_1(input: List[str]) -> int:
-    return 0
+def split_blocks(rest: List[str]) -> List[List[List[int]]]:
+    blocks = [block.strip().split("\n") for block in rest]
+    return [[list(map(int, row.split())) for row in block[1:]] for block in blocks]
 
 
-def solve_2(input: List[str]) -> int:
+def solve_1(input_data: str) -> int:
+    seeds, *rest = input_data.split("\n\n")
+    seeds = remove_prefix(seeds)
+    seeds = split_numbers(seeds)
+    blocks = split_blocks(rest)
+
+
+def solve_2(input_data: str) -> int:
     return 0
 
 
 def main():
-    with open(f"{INPUT_DIR}/5_1_input.txt", "r", encoding="utf-8") as f:
-        seeds = f.readline()
-        seeds = remove_prefix(seeds)
-        seeds = split_numbers(seeds)
-        print(seeds)
-        # print(f"Part 1: {solve_1(x)}")
-        # print(f"Part 2: {solve_2(x)}")
+    with open(f"{INPUT_DIR}/5_1_test.txt", "r", encoding="utf-8") as f:
+        x = f.read()
+        print(f"Part 1: {solve_1(x)}")
+        print(f"Part 2: {solve_2(x)}")
 
 
 if __name__ == "__main__":
