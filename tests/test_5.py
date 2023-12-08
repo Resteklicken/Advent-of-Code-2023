@@ -101,3 +101,12 @@ def test_resolve_seed_ranges_for_brute_force():
 
 def test_resolve_seed_ranges():
     assert resolve_seed_ranges([79, 14, 55, 13]) == [55, 67, 79, 92]
+
+
+def test_calculate_mapping_endpoints():
+    assert calculate_mapping_endpoints([[50, 98, 2], [52, 50, 48]]) == [
+        (50, 98),
+        (51, 99),
+        (52, 50),
+        (99, 97),
+    ]

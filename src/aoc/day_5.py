@@ -1,4 +1,5 @@
 import re
+import sys
 from concurrent.futures import Future, ThreadPoolExecutor
 from typing import List, Tuple
 
@@ -62,6 +63,40 @@ def resolve_seed_ranges(seeds: List[int]) -> List[int]:
     for i in range(0, len(seeds), 2):
         seeds[i + 1] = seeds[i] + seeds[i + 1] - 1
     return sorted(seeds)
+
+
+def resolve_next_mapping_inverse(seed: int, mapping: List[List[int]]):
+    # Credit to /u/zuleyorker for this version
+    for dst, src, rlen in mapping:
+        if dst <= seed < dst + rlen:
+            return src + (seed - dst)
+    return seed
+
+
+def calculate_mapping_endpoints(mapping: List[List[int]]) -> List[Tuple[int, int]]:
+    return sum(
+        sorted(
+            [(d_start, s_start), (d_start + rlen - 1, s_start + rlen - 1)]
+            for d_start, s_start, rlen in mapping
+        ),
+        [],
+    )
+
+
+def invert_mapping(mapping: List[List[int]], params: List[int]):
+    map_endpts = calculate_mapping_endpoints(mapping)
+
+    output_src_endpts = sorted(
+        [resolve_next_mapping_inverse(param, mapping) for param in params]
+    )
+    input_src_endpts = sorted(set([x[0] for x in map_endpts]))
+    if input_src_endpts[0] > 0:
+        input_src_endpts = [0, input_src_endpts[0] - 1] + input_src_endpts
+    if input_src_endpts[-1] < sys.maxsize:
+        input_src_endpts = input_src_endpts + [input_src_endpts[-1] + 1, sys.maxsize]
+    input_endpts = sorted(set(output_src_endpts) | set(input_src_endpts))
+
+    return input_endpts
 
 
 def solve_2(input_data: str) -> int:
