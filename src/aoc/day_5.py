@@ -98,7 +98,7 @@ def invert_mapping(mapping: List[List[int]], params: List[int]) -> List[int]:
     return input_endpts
 
 
-def invert_mappings(mappings: List[List[List[int]]]):
+def invert_mappings(mappings: List[List[List[int]]]) -> List[List[int]]:
     rev_mappings = list(reversed(mappings))
     inverted_mappings = [invert_mapping(rev_mappings[0], [0, sys.maxsize])]
     for i, mapping in enumerate(rev_mappings[1:]):
@@ -117,9 +117,7 @@ def solve_2(input_data: str) -> int:
     seeds = resolve_seed_ranges(seeds)
     mappings = split_blocks(rest)
     inverted_mappings = invert_mappings(deepcopy(mappings))
-    # Intersect seed endpoints with seed ranges.
     seed_endpts = [s for s in inverted_mappings[-1] if in_seed_range(seeds, s)]
-    # Make sure to include the endpoints of the seed ranges.
     seed_endpts = sorted(set(seed_endpts) | set(seeds))
     with ThreadPoolExecutor(max_workers=len(seed_endpts)) as pool:
         locations = [pool.submit(find_location, seed, mappings) for seed in seed_endpts]
