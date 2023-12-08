@@ -1,5 +1,5 @@
-from concurrent.futures import Future, ThreadPoolExecutor
 import re
+from concurrent.futures import Future, ThreadPoolExecutor
 from typing import List, Tuple
 
 from aoc import INPUT_DIR
@@ -20,10 +20,10 @@ def split_blocks(rest: List[str]) -> List[List[List[int]]]:
 
 
 def resolve_next_mapping(seed: int, mapping: List[List[int]]):
-    for dst, src, range_len in mapping:
-        for i, num in enumerate(range(src, src + range_len + 1)):
-            if num == seed:
-                return dst + i
+    # Credit to /u/zuleyorker for this version
+    for dst, src, rlen in mapping:
+        if src <= seed < src + rlen:
+            return dst + (seed - src)
     return seed
 
 
