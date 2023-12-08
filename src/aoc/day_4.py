@@ -30,8 +30,8 @@ def calculate_score(length: int) -> int:
         return 2 ** (length - 1)
 
 
-def solve_1(test_input: List[str]) -> int:
-    s = list(map(remove_prefix, test_input))
+def solve_1(input_data: List[str]) -> int:
+    s = list(map(remove_prefix, input_data))
     ss = list(map(split_games, s))
     sss = [list(map(set, map(split_numbers, line))) for line in ss]
     ssss = list(map(get_intersection, sss))
@@ -57,8 +57,8 @@ def calculate_number_of_cards(
     return
 
 
-def solve_2(test_input: List[str]) -> int:
-    s = list(map(remove_prefix, test_input))
+def solve_2(input_data: List[str]) -> int:
+    s = list(map(remove_prefix, input_data))
     ss = list(map(split_games, s))
     sss = [list(map(set, map(split_numbers, line))) for line in ss]
     ssss = list(map(get_intersection, sss))

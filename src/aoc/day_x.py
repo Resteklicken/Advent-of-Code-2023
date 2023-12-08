@@ -3,11 +3,11 @@ from typing import List
 from aoc import INPUT_DIR
 
 
-def solve_1(input: List[str]) -> int:
+def solve_1(input_data: List[str]) -> int:
     return 0
 
 
-def solve_2(input: List[str]) -> int:
+def solve_2(input_data: List[str]) -> int:
     return 0
 
 
