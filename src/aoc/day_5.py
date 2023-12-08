@@ -18,11 +18,20 @@ def split_blocks(rest: List[str]) -> List[List[List[int]]]:
     return [[list(map(int, row.split())) for row in block[1:]] for block in blocks]
 
 
+def resolve_next_mapping(seed: int, mapping: List[List[int]]):
+    for line in mapping:
+        dst, src, range_len = line
+        for i, num in enumerate(range(src, src + range_len + 1)):
+            if num == seed:
+                return dst + i
+    return seed
+
+
 def solve_1(input_data: str) -> int:
     seeds, *rest = input_data.split("\n\n")
     seeds = remove_prefix(seeds)
     seeds = split_numbers(seeds)
-    blocks = split_blocks(rest)
+    mappings = split_blocks(rest)
 
 
 def solve_2(input_data: str) -> int:
