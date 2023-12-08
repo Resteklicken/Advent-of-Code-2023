@@ -50,8 +50,29 @@ def solve_1(input_data: str) -> int:
     return get_lowest_element(locations)
 
 
+def resolve_seed_ranges_for_brute_force(seeds: List[int]) -> List[int]:
+    new = []
+    for i in range(0, len(seeds), 2):
+        for j in range(seeds[i + 1]):
+            new.append(seeds[i] + j)
+    return sorted(new)
+
+
+def resolve_seed_ranges(seeds: List[int]) -> List[int]:
+    for i in range(0, len(seeds), 2):
+        seeds[i + 1] = seeds[i] + seeds[i + 1] - 1
+    return sorted(seeds)
+
+
 def solve_2(input_data: str) -> int:
-    return 0
+    seeds, *rest = input_data.split("\n\n")
+    seeds = remove_prefix(seeds)
+    seeds = split_numbers(seeds)
+    seeds = resolve_seed_ranges_for_brute_force(seeds)
+    mappings = split_blocks(rest)
+    with ThreadPoolExecutor(max_workers=len(seeds)) as pool:
+        locations = [pool.submit(find_location, seed, mappings) for seed in seeds]
+    return get_lowest_element(locations)
 
 
 def main():
