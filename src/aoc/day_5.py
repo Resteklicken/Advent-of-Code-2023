@@ -1,5 +1,6 @@
+from concurrent.futures import Future, ThreadPoolExecutor
 import re
-from typing import List
+from typing import List, Tuple
 
 from aoc import INPUT_DIR
 
@@ -27,19 +28,27 @@ def resolve_next_mapping(seed: int, mapping: List[List[int]]):
     return seed
 
 
+def find_location(seed: int, mappings: List[List[List[int]]]) -> Tuple[int, int]:
+    cur = seed
+    for mapping in mappings:
+        cur = resolve_next_mapping(cur, mapping)
+    return (seed, cur)
+
+
+def get_lowest_element(future_list: list[Future[Tuple[int, int]]]) -> int:
+    resolved_tuples = [future.result() for future in future_list]
+    min_element = min(resolved_tuples, key=lambda x: x[1])
+    return min_element[1]
+
+
 def solve_1(input_data: str) -> int:
     seeds, *rest = input_data.split("\n\n")
     seeds = remove_prefix(seeds)
     seeds = split_numbers(seeds)
     mappings = split_blocks(rest)
-    locations = {}
-    for seed in seeds:
-        cur = seed
-        for mapping in mappings:
-            cur = resolve_next_mapping(cur, mapping)
-        locations[seed] = cur
-    lowest = min(locations.keys())
-    return locations[lowest]
+    with ThreadPoolExecutor(max_workers=len(seeds)) as pool:
+        locations = [pool.submit(find_location, seed, mappings) for seed in seeds]
+    return get_lowest_element(locations)
 
 
 def solve_2(input_data: str) -> int:

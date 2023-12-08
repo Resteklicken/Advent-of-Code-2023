@@ -48,5 +48,20 @@ def test_resolve_next_mapping(seed, mapping, expected):
     assert resolve_next_mapping(seed, mapping) == expected
 
 
+@pytest.mark.parametrize(
+    "seed,expected",
+    [
+        (79, 82),
+        (14, 43),
+        (55, 86),
+        (13, 35),
+    ],
+)
+def test_find_location(seed, expected, test_input_1):
+    _, *rest = test_input_1.split("\n\n")
+    mappings = split_blocks(rest)
+    assert find_location(seed, mappings) == (seed, expected)
+
+
 def test_solve_1(test_input_1):
     assert solve_1(test_input_1) == 35
